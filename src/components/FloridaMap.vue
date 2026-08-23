@@ -4,9 +4,6 @@
     <div v-if="error" class="error">{{ error }}</div>
 
     <div class="controls">
-      <label :class="{ active: layer === 'state' }" @click="setLayer('state')">
-        <span class="swatch state-swatch"></span> State outline
-      </label>
       <label :class="{ active: layer === 'cuban' }" @click="setLayer('cuban')">
         <span class="swatch cuban-swatch"></span> Cuban
       </label>
@@ -26,16 +23,16 @@
         <span class="swatch other_hispanic-swatch"></span> Other Hispanic
       </label>
       <label :class="{ active: layer === 'young' }" @click="setLayer('young')">
-        <span class="swatch young-swatch"></span> Young voters (% age 18–34)
+        <span class="swatch young-swatch"></span> Youth (% 18-34)
       </label>
       <label :class="{ active: layer === 'democrat' }" @click="setLayer('democrat')">
-        <span class="swatch democrat-swatch"></span> Registered Democrats (% of voters)
+        <span class="swatch democrat-swatch"></span> Registered Democrats (%)
       </label>
       <label :class="{ active: layer === 'unaffiliated' }" @click="setLayer('unaffiliated')">
-        <span class="swatch unaffiliated-swatch"></span> NPA/Unaffiliated (% of voters)
+        <span class="swatch unaffiliated-swatch"></span> NPA/Unaffiliated (%)
       </label>
       <label :class="{ active: layer === 'republican' }" @click="setLayer('republican')">
-        <span class="swatch republican-swatch"></span> Registered Republicans (% of voters)
+        <span class="swatch republican-swatch"></span> Registered Republicans (%)
       </label>
     </div>
 
