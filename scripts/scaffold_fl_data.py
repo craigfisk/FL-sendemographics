@@ -62,8 +62,12 @@ def main():
             "geometry": c["geometry"],
             "properties": {
                 "name": county_name,
-                "pct_hispanic": round(random.uniform(5, 65), 1),
-                "pct_spanish": round(random.uniform(2, 60), 1),
+                "pct_cuban": round(random.uniform(0, 30), 1),
+                "pct_puerto_rican": round(random.uniform(0, 20), 1),
+                "pct_venezuelan": round(random.uniform(0, 10), 1),
+                "pct_colombian": round(random.uniform(0, 10), 1),
+                "pct_jamaican": round(random.uniform(0, 5), 1),
+                "pct_other_hispanic": round(random.uniform(0, 15), 1),
                 "pct_young": round(random.uniform(10, 35), 1),
                 "total_pop": random.randint(10000, 1500000)
             }
