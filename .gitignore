@@ -1,7 +1,1 @@
-node_modules/
-dist/
-.netlify/
-*.local
-.env
-.env.*
-!.env.example
+node_modules/\n.env\ndist/
