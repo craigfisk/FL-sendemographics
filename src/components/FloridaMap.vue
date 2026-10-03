@@ -25,6 +25,15 @@
       <label :class="{ active: layer === 'young' }" @click="setLayer('young')">
         <span class="swatch young-swatch"></span> Youth (% 18-34)
       </label>
+      <label :class="{ active: layer === 'middle_age' }" @click="setLayer('middle_age')">
+        <span class="swatch middle_age-swatch"></span> Middle Age (% 35-49)
+      </label>
+      <label :class="{ active: layer === 'women' }" @click="setLayer('women')">
+        <span class="swatch women-swatch"></span> Women
+      </label>
+      <label :class="{ active: layer === 'black' }" @click="setLayer('black')">
+        <span class="swatch black-swatch"></span> Black
+      </label>
       <label :class="{ active: layer === 'democrat' }" @click="setLayer('democrat')">
         <span class="swatch democrat-swatch"></span> Registered Democrats (%)
       </label>
@@ -47,6 +56,9 @@
          : layer === 'jamaican'        ? '% Jamaican'
          : layer === 'other_hispanic'  ? '% Other Hispanic'
          : layer === 'young'           ? '% age 18–34'
+         : layer === 'middle_age'      ? '% Middle Age (35-49)'
+         : layer === 'women'           ? '% Women'
+         : layer === 'black'           ? '% Black'
          : layer === 'democrat'        ? '% Registered Democrat'
          : layer === 'republican'      ? '% Registered Republican'
          :                               '% NPA/Unaffiliated' }}
@@ -58,7 +70,7 @@
         </span>
       </div>
       <div class="legend-note">
-        {{ ['cuban', 'puerto_rican', 'venezuelan', 'colombian', 'jamaican', 'other_hispanic', 'young'].includes(layer) 
+        {{ ['cuban', 'puerto_rican', 'venezuelan', 'colombian', 'jamaican', 'other_hispanic', 'young', 'middle_age', 'women', 'black'].includes(layer) 
          ? 'Source: ACS 2024 5-yr, Census tracts within Florida'
          : 'Source: FL Division of Elections (County level)' }}
       </div>
@@ -71,7 +83,7 @@ import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
-type LayerName = 'state' | 'cuban' | 'puerto_rican' | 'venezuelan' | 'colombian' | 'jamaican' | 'other_hispanic' | 'young' | 'democrat' | 'unaffiliated' | 'republican'
+type LayerName = 'state' | 'cuban' | 'puerto_rican' | 'venezuelan' | 'colombian' | 'jamaican' | 'other_hispanic' | 'young' | 'middle_age' | 'women' | 'black' | 'democrat' | 'unaffiliated' | 'republican'
 
 const mapEl = ref<HTMLElement | null>(null)
 const loading = ref(true)
@@ -89,6 +101,9 @@ let jamaicanLayer: L.GeoJSON | null = null
 let otherHispanicLayer: L.GeoJSON | null = null
 
 let youngLayer: L.GeoJSON | null = null
+let middleAgeLayer: L.GeoJSON | null = null
+let womenLayer: L.GeoJSON | null = null
+let blackLayer: L.GeoJSON | null = null
 let democratLayer: L.GeoJSON | null = null
 let unaffiliatedLayer: L.GeoJSON | null = null
 let republicanLayer: L.GeoJSON | null = null
@@ -118,6 +133,15 @@ const otherHispColors = ['#feebe2', '#fbb4b9', '#f768a1', '#c51b8a', '#7a0177']
 const youngBreaks = [0, 15, 20, 25, 30, 100]
 const youngColors  = ['#f7fbff', '#9ecae1', '#4292c6', '#2171b5', '#084594']
 
+const middleAgeBreaks = [0, 15, 20, 25, 30, 100]
+const middleAgeColors = ['#f7fcf5', '#e5f5e0', '#a1d99b', '#31a354', '#006d2c']
+
+const womenBreaks = [0, 40, 45, 50, 55, 100]
+const womenColors = ['#f2f0f7', '#cbc9e2', '#9e9ac8', '#756bb1', '#54278f']
+
+const blackBreaks = [0, 5, 15, 30, 50, 100]
+const blackColors = ['#ffffd4', '#fed98e', '#fe9929', '#d95f0e', '#993404']
+
 const demBreaks = [0, 25, 35, 45, 55, 100]
 const demColors = ['#edf8e9', '#bae4b3', '#74c476', '#31a354', '#006d2c']
 
@@ -144,6 +168,9 @@ const activeLegend = computed(() => {
     : layer.value === 'jamaican'     ? [jamBreaks, jamColors]
     : layer.value === 'other_hispanic'? [otherHispBreaks, otherHispColors]
     : layer.value === 'young'        ? [youngBreaks, youngColors]
+    : layer.value === 'middle_age'   ? [middleAgeBreaks, middleAgeColors]
+    : layer.value === 'women'        ? [womenBreaks, womenColors]
+    : layer.value === 'black'        ? [blackBreaks, blackColors]
     : layer.value === 'democrat'     ? [demBreaks, demColors]
     : layer.value === 'republican'   ? [repBreaks, repColors]
     :                                  [unaffBreaks, unaffColors]
@@ -184,6 +211,9 @@ function buildDemoLayers() {
     jamaicanLayer = createDemoLayer('pct_jamaican', jamBreaks, jamColors, 'Jamaican')
     otherHispanicLayer = createDemoLayer('pct_other_hispanic', otherHispBreaks, otherHispColors, 'Other Hispanic')
     youngLayer = createDemoLayer('pct_young', youngBreaks, youngColors, 'Age 18–34')
+    middleAgeLayer = createDemoLayer('pct_middle_age', middleAgeBreaks, middleAgeColors, 'Middle Age (35-49)')
+    womenLayer = createDemoLayer('pct_women', womenBreaks, womenColors, 'Women')
+    blackLayer = createDemoLayer('pct_black', blackBreaks, blackColors, 'Black')
   }
 
   if (voterData) {
@@ -255,6 +285,9 @@ function setLayer(name: LayerName) {
   jamaicanLayer?.remove()
   otherHispanicLayer?.remove()
   youngLayer?.remove()
+  middleAgeLayer?.remove()
+  womenLayer?.remove()
+  blackLayer?.remove()
 
   // Remove voter layers
   democratLayer?.remove()
@@ -287,6 +320,15 @@ function setLayer(name: LayerName) {
     stateLayer?.addTo(map)
   } else if (name === 'young') {
     youngLayer?.addTo(map)
+    stateLayer?.addTo(map)
+  } else if (name === 'middle_age') {
+    middleAgeLayer?.addTo(map)
+    stateLayer?.addTo(map)
+  } else if (name === 'women') {
+    womenLayer?.addTo(map)
+    stateLayer?.addTo(map)
+  } else if (name === 'black') {
+    blackLayer?.addTo(map)
     stateLayer?.addTo(map)
   } else if (name === 'democrat') {
     democratLayer?.addTo(map)
@@ -411,6 +453,9 @@ onUnmounted(() => {
 .other_hispanic-swatch{ background: #c51b8a; }
 
 .young-swatch         { background: #2171b5; }
+.middle_age-swatch    { background: #31a354; }
+.women-swatch         { background: #756bb1; }
+.black-swatch         { background: #d95f0e; }
 .democrat-swatch      { background: #31a354; }
 .unaffiliated-swatch  { background: #fd8d3c; }
 .republican-swatch    { background: #fb6a4a; }
