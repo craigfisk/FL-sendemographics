@@ -45,7 +45,12 @@
       </label>
     </div>
 
-    <div id="fl-map" ref="mapEl"></div>
+    <div class="map-wrapper">
+      <div id="fl-map" ref="mapEl"></div>
+      <button class="sources-button" @click="showSourcesModal = true">
+        Sources
+      </button>
+    </div>
 
     <div v-if="layer !== 'state'" class="legend">
       <div class="legend-title">
@@ -75,6 +80,33 @@
          : 'Source: FL Division of Elections (County level)' }}
       </div>
     </div>
+
+    <!-- Sources Modal -->
+    <div v-if="showSourcesModal" class="modal-overlay" @click="showSourcesModal = false">
+      <div class="modal-content" @click.stop>
+        <h3>Data Sources</h3>
+        <p><strong>Demographics (Source: American Community Survey 2024 5-yr Estimates, Census tracts within Florida)</strong></p>
+        <ul>
+          <li><strong>Cuban:</strong> % of population identifying as Cuban</li>
+          <li><strong>Puerto Rican:</strong> % of population identifying as Puerto Rican</li>
+          <li><strong>Venezuelan:</strong> % of population identifying as Venezuelan</li>
+          <li><strong>Colombian:</strong> % of population identifying as Colombian</li>
+          <li><strong>Jamaican:</strong> % of population identifying as Jamaican</li>
+          <li><strong>Other Hispanic:</strong> % of population identifying as Other Hispanic</li>
+          <li><strong>Youth (% 18-34):</strong> % of population aged 18 to 34</li>
+          <li><strong>Middle Age (% 35-49):</strong> % of population aged 35 to 49</li>
+          <li><strong>Women:</strong> % of the population identifying as female</li>
+          <li><strong>Black:</strong> % of the population identifying as Black or African American</li>
+        </ul>
+        <p><strong>Voter Registration (Source: FL Division of Elections, County level)</strong></p>
+        <ul>
+          <li><strong>Registered Democrats (%):</strong> % of registered voters affiliated with the Democratic Party</li>
+          <li><strong>NPA/Unaffiliated (%):</strong> % of registered voters with No Party Affiliation (NPA) or unaffiliated</li>
+          <li><strong>Registered Republicans (%):</strong> % of registered voters affiliated with the Republican Party</li>
+        </ul>
+        <button class="close-button" @click="showSourcesModal = false">Close</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -89,6 +121,7 @@ const mapEl = ref<HTMLElement | null>(null)
 const loading = ref(true)
 const error = ref('')
 const layer = ref<LayerName>('state')
+const showSourcesModal = ref(false)
 
 let map: L.Map | null = null
 let stateLayer: L.GeoJSON | null = null
@@ -460,13 +493,44 @@ onUnmounted(() => {
 .unaffiliated-swatch  { background: #fd8d3c; }
 .republican-swatch    { background: #fb6a4a; }
 
-#fl-map {
+.map-wrapper {
+  position: relative;
   width: 100%;
   max-width: 900px;
+}
+
+#fl-map {
+  width: 100%;
   height: 600px;
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.sources-button {
+  position: absolute;
+  bottom: 25px;
+  left: 20px;
+  z-index: 1000;
+  cursor: pointer;
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+  background: #fff;
+  transition: all 0.2s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  color: #333;
+  text-decoration: none;
+}
+
+.sources-button:hover {
+  background: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 .loading, .error { margin-bottom: 1rem; padding: 1rem; background: #fff; border-radius: 4px; color: #555; }
@@ -506,4 +570,58 @@ onUnmounted(() => {
 }
 
 .legend-note { color: #666; margin-top: 8px; font-size: 11px; font-style: italic; }
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  text-align: left;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  color: #2c3e50;
+}
+
+.modal-content ul {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.modal-content li {
+  margin-bottom: 0.25rem;
+}
+
+.close-button {
+  margin-top: 1rem;
+  padding: 8px 16px;
+  background: #2c3e50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.close-button:hover {
+  background: #1a252f;
+}
 </style>
