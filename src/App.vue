@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>FL-Sen Demographics (2026)</h1>
+    <h1>FL Senate Demographics (2026)</h1>
     <FloridaMap />
   </div>
 </template>
