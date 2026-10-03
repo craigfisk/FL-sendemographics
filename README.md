@@ -25,6 +25,6 @@ The map provides several interactive layers containing demographic and voter reg
 * **Black:** % of the population identifying as Black or African American
 
 **Voter Registration (Source: FL Division of Elections, County level)**
-* **Registered Democrats (%):** % of registered voters affiliated with the Democratic Party
-* **NPA/Unaffiliated (%):** % of registered voters with No Party Affiliation (NPA) or unaffiliated
-* **Registered Republicans (%):** % of registered voters affiliated with the Republican Party
+* **Registered Dems:** % of registered voters affiliated with the Democratic Party
+* **NPA/Unaffiliated:** % of registered voters with No Party Affiliation (NPA) or unaffiliated
+* **Registered Repubs:** % of registered voters affiliated with the Republican Party
