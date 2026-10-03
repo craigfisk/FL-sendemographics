@@ -45,7 +45,12 @@
       </label>
     </div>
 
-    <div id="fl-map" ref="mapEl"></div>
+    <div class="map-wrapper">
+      <div id="fl-map" ref="mapEl"></div>
+      <a href="https://github.com/craigfisk/FL-sendemographics/blob/main/README.md#data-sources" target="_blank" rel="noopener noreferrer" class="sources-button">
+        Sources
+      </a>
+    </div>
 
     <div v-if="layer !== 'state'" class="legend">
       <div class="legend-title">
@@ -74,10 +79,6 @@
          ? 'Source: ACS 2024 5-yr, Census tracts within Florida'
          : 'Source: FL Division of Elections (County level)' }}
       </div>
-    </div>
-    
-    <div class="sources-link">
-      <a href="https://github.com/craigfisk/FL-sendemographics/blob/main/README.md#data-sources" target="_blank" rel="noopener noreferrer">Sources</a>
     </div>
   </div>
 </template>
@@ -464,13 +465,44 @@ onUnmounted(() => {
 .unaffiliated-swatch  { background: #fd8d3c; }
 .republican-swatch    { background: #fb6a4a; }
 
-#fl-map {
+.map-wrapper {
+  position: relative;
   width: 100%;
   max-width: 900px;
+}
+
+#fl-map {
+  width: 100%;
   height: 600px;
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.sources-button {
+  position: absolute;
+  bottom: 25px;
+  left: 20px;
+  z-index: 1000;
+  cursor: pointer;
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+  background: #fff;
+  transition: all 0.2s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  color: #333;
+  text-decoration: none;
+}
+
+.sources-button:hover {
+  background: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 .loading, .error { margin-bottom: 1rem; padding: 1rem; background: #fff; border-radius: 4px; color: #555; }
@@ -510,11 +542,4 @@ onUnmounted(() => {
 }
 
 .legend-note { color: #666; margin-top: 8px; font-size: 11px; font-style: italic; }
-
-.sources-link {
-  margin-top: 1rem;
-  font-size: 13px;
-}
-.sources-link a { color: #2171b5; text-decoration: none; font-weight: bold; }
-.sources-link a:hover { text-decoration: underline; }
 </style>
