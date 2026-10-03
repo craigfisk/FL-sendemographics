@@ -35,13 +35,13 @@
         <span class="swatch black-swatch"></span> Black
       </label>
       <label :class="{ active: layer === 'democrat' }" @click="setLayer('democrat')">
-        <span class="swatch democrat-swatch"></span> Registered Democrats (%)
+        <span class="swatch democrat-swatch"></span> Registered Dems
       </label>
       <label :class="{ active: layer === 'unaffiliated' }" @click="setLayer('unaffiliated')">
-        <span class="swatch unaffiliated-swatch"></span> NPA/Unaffiliated (%)
+        <span class="swatch unaffiliated-swatch"></span> NPA/Unaffiliated
       </label>
       <label :class="{ active: layer === 'republican' }" @click="setLayer('republican')">
-        <span class="swatch republican-swatch"></span> Registered Republicans (%)
+        <span class="swatch republican-swatch"></span> Registered Repubs
       </label>
     </div>
 
@@ -64,8 +64,8 @@
          : layer === 'middle_age'      ? '% Middle Age (35-49)'
          : layer === 'women'           ? '% Women'
          : layer === 'black'           ? '% Black'
-         : layer === 'democrat'        ? '% Registered Democrat'
-         : layer === 'republican'      ? '% Registered Republican'
+         : layer === 'democrat'        ? '% Registered Dems'
+         : layer === 'republican'      ? '% Registered Repubs'
          :                               '% NPA/Unaffiliated' }}
       </div>
       <div class="legend-scale">
@@ -100,9 +100,9 @@
         </ul>
         <p><strong>Voter Registration (Source: FL Division of Elections, County level)</strong></p>
         <ul>
-          <li><strong>Registered Democrats (%):</strong> % of registered voters affiliated with the Democratic Party</li>
-          <li><strong>NPA/Unaffiliated (%):</strong> % of registered voters with No Party Affiliation (NPA) or unaffiliated</li>
-          <li><strong>Registered Republicans (%):</strong> % of registered voters affiliated with the Republican Party</li>
+          <li><strong>Registered Dems:</strong> % of registered voters affiliated with the Democratic Party</li>
+          <li><strong>NPA/Unaffiliated:</strong> % of registered voters with No Party Affiliation (NPA) or unaffiliated</li>
+          <li><strong>Registered Repubs:</strong> % of registered voters affiliated with the Republican Party</li>
         </ul>
         <button class="close-button" @click="showSourcesModal = false">Close</button>
       </div>
@@ -262,7 +262,7 @@ function buildDemoLayers() {
         const locName = p.county || p.municipality || p.name || 'Unknown'
         l.bindTooltip(
           `<strong>${locName}</strong><br>` +
-          (p.pct_dem != null ? `Registered Democrat: <b>${p.pct_dem}%</b>` : 'No data'),
+          (p.pct_dem != null ? `Registered Dems: <b>${p.pct_dem}%</b>` : 'No data'),
           { sticky: true }
         )
       },
@@ -298,7 +298,7 @@ function buildDemoLayers() {
         const locName = p.county || p.municipality || p.name || 'Unknown'
         l.bindTooltip(
           `<strong>${locName}</strong><br>` +
-          (p.pct_rep != null ? `Registered Republican: <b>${p.pct_rep}%</b>` : 'No data'),
+          (p.pct_rep != null ? `Registered Repubs: <b>${p.pct_rep}%</b>` : 'No data'),
           { sticky: true }
         )
       },
@@ -449,7 +449,7 @@ onUnmounted(() => {
   padding: 6px 14px;
   border-radius: 6px;
   border: 1px solid #ddd;
-  font-size: 14px;
+  font-size: 12px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -509,14 +509,15 @@ onUnmounted(() => {
 
 .sources-button {
   position: absolute;
-  bottom: 25px;
+  top: 50%;
   left: 20px;
+  transform: translateY(-50%);
   z-index: 1000;
   cursor: pointer;
   padding: 6px 14px;
   border-radius: 6px;
   border: 1px solid #ddd;
-  font-size: 14px;
+  font-size: 12px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -617,7 +618,7 @@ onUnmounted(() => {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
   transition: background 0.2s;
 }
 

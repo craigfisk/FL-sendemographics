@@ -6,7 +6,7 @@ An interactive map application visualizing demographics and voter registration d
 * Interactive map of Florida counties and demographic data.
 * Demographic layers for various groups (Cuban, Puerto Rican, Venezuelan, Colombian, Jamaican, Other Hispanic, Youth, Middle Age, Women, Black).
 * Voter Registration layers.
-* "Sources" button placed over the Gulf of Mexico for easy reference. Clicking this button opens an in-app modal containing detailed data source information for all demographic and voter registration layers.
+* "Sources" button placed over the Gulf of Mexico (vertically centered on the left side to ensure it remains over the water on all device screens, including phones) for easy reference. Clicking this button opens an in-app modal containing detailed data source information for all demographic and voter registration layers.
 
 ## Data Sources
 
@@ -25,6 +25,6 @@ The map provides several interactive layers containing demographic and voter reg
 * **Black:** % of the population identifying as Black or African American
 
 **Voter Registration (Source: FL Division of Elections, County level)**
-* **Registered Democrats (%):** % of registered voters affiliated with the Democratic Party
-* **NPA/Unaffiliated (%):** % of registered voters with No Party Affiliation (NPA) or unaffiliated
-* **Registered Republicans (%):** % of registered voters affiliated with the Republican Party
+* **Registered Dems:** % of registered voters affiliated with the Democratic Party
+* **NPA/Unaffiliated:** % of registered voters with No Party Affiliation (NPA) or unaffiliated
+* **Registered Repubs:** % of registered voters affiliated with the Republican Party
