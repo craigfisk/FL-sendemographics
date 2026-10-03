@@ -26,7 +26,7 @@
         <span class="swatch young-swatch"></span> Youth (% 18-34)
       </label>
       <label :class="{ active: layer === 'middle_age' }" @click="setLayer('middle_age')">
-        <span class="swatch middle_age-swatch"></span> Middle Aged (% 35-49)
+        <span class="swatch middle_age-swatch"></span> Middle Age (% 35-49)
       </label>
       <label :class="{ active: layer === 'women' }" @click="setLayer('women')">
         <span class="swatch women-swatch"></span> Women
@@ -56,7 +56,7 @@
          : layer === 'jamaican'        ? '% Jamaican'
          : layer === 'other_hispanic'  ? '% Other Hispanic'
          : layer === 'young'           ? '% age 18–34'
-         : layer === 'middle_age'      ? '% Middle Aged (35-49)'
+         : layer === 'middle_age'      ? '% Middle Age (35-49)'
          : layer === 'women'           ? '% Women'
          : layer === 'black'           ? '% Black'
          : layer === 'democrat'        ? '% Registered Democrat'
@@ -211,7 +211,7 @@ function buildDemoLayers() {
     jamaicanLayer = createDemoLayer('pct_jamaican', jamBreaks, jamColors, 'Jamaican')
     otherHispanicLayer = createDemoLayer('pct_other_hispanic', otherHispBreaks, otherHispColors, 'Other Hispanic')
     youngLayer = createDemoLayer('pct_young', youngBreaks, youngColors, 'Age 18–34')
-    middleAgeLayer = createDemoLayer('pct_middle_age', middleAgeBreaks, middleAgeColors, 'Middle Aged (35-49)')
+    middleAgeLayer = createDemoLayer('pct_middle_age', middleAgeBreaks, middleAgeColors, 'Middle Age (35-49)')
     womenLayer = createDemoLayer('pct_women', womenBreaks, womenColors, 'Women')
     blackLayer = createDemoLayer('pct_black', blackBreaks, blackColors, 'Black')
   }
