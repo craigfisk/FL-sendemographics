@@ -449,7 +449,7 @@ onUnmounted(() => {
   padding: 6px 14px;
   border-radius: 6px;
   border: 1px solid #ddd;
-  font-size: 12px;
+  font-size: 11px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -517,7 +517,7 @@ onUnmounted(() => {
   padding: 6px 14px;
   border-radius: 6px;
   border: 1px solid #ddd;
-  font-size: 12px;
+  font-size: 11px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -618,7 +618,7 @@ onUnmounted(() => {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 11px;
   transition: background 0.2s;
 }
 
