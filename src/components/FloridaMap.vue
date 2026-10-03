@@ -73,9 +73,11 @@
         {{ ['cuban', 'puerto_rican', 'venezuelan', 'colombian', 'jamaican', 'other_hispanic', 'young', 'middle_age', 'women', 'black'].includes(layer) 
          ? 'Source: ACS 2024 5-yr, Census tracts within Florida'
          : 'Source: FL Division of Elections (County level)' }}
-        <br />
-        <a href="https://github.com/craigfisk/FL-sendemographics/blob/main/README.md#data-sources" target="_blank" rel="noopener noreferrer">Detailed Sources (README)</a>
       </div>
+    </div>
+    
+    <div class="sources-link">
+      <a href="https://github.com/craigfisk/FL-sendemographics/blob/main/README.md#data-sources" target="_blank" rel="noopener noreferrer">Sources</a>
     </div>
   </div>
 </template>
@@ -508,6 +510,11 @@ onUnmounted(() => {
 }
 
 .legend-note { color: #666; margin-top: 8px; font-size: 11px; font-style: italic; }
-.legend-note a { color: #2171b5; text-decoration: none; }
-.legend-note a:hover { text-decoration: underline; }
+
+.sources-link {
+  margin-top: 1rem;
+  font-size: 13px;
+}
+.sources-link a { color: #2171b5; text-decoration: none; font-weight: bold; }
+.sources-link a:hover { text-decoration: underline; }
 </style>
