@@ -6,7 +6,7 @@ An interactive map application visualizing demographics and voter registration d
 * Interactive map of Florida counties and demographic data.
 * Demographic layers for various groups (Cuban, Puerto Rican, Venezuelan, Colombian, Jamaican, Other Hispanic, Youth, Middle Age, Women, Black).
 * Voter Registration layers.
-* "Sources" button placed over the Gulf of Mexico for easy reference. Clicking this button opens an in-app modal containing detailed data source information for all demographic and voter registration layers.
+* "Sources" button placed over the Gulf of Mexico (vertically centered on the left side to ensure it remains over the water on all device screens, including phones) for easy reference. Clicking this button opens an in-app modal containing detailed data source information for all demographic and voter registration layers.
 
 ## Data Sources
 

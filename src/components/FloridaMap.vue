@@ -449,7 +449,7 @@ onUnmounted(() => {
   padding: 6px 14px;
   border-radius: 6px;
   border: 1px solid #ddd;
-  font-size: 14px;
+  font-size: 12px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -509,14 +509,15 @@ onUnmounted(() => {
 
 .sources-button {
   position: absolute;
-  bottom: 25px;
+  top: 50%;
   left: 20px;
+  transform: translateY(-50%);
   z-index: 1000;
   cursor: pointer;
   padding: 6px 14px;
   border-radius: 6px;
   border: 1px solid #ddd;
-  font-size: 14px;
+  font-size: 12px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -617,7 +618,7 @@ onUnmounted(() => {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
   transition: background 0.2s;
 }
 
