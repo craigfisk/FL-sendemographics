@@ -19,6 +19,9 @@
       <label :class="{ active: layer === 'jamaican' }" @click="setLayer('jamaican')">
         <span class="swatch jamaican-swatch"></span> Jamaican
       </label>
+      <label :class="{ active: layer === 'haitian' }" @click="setLayer('haitian')">
+        <span class="swatch haitian-swatch"></span> Haitian
+      </label>
       <label :class="{ active: layer === 'other_hispanic' }" @click="setLayer('other_hispanic')">
         <span class="swatch other_hispanic-swatch"></span> Other Hispanic
       </label>
@@ -59,6 +62,7 @@
          : layer === 'venezuelan'      ? '% Venezuelan'
          : layer === 'colombian'       ? '% Colombian'
          : layer === 'jamaican'        ? '% Jamaican'
+         : layer === 'haitian'         ? '% Haitian'
          : layer === 'other_hispanic'  ? '% Other Hispanic'
          : layer === 'young'           ? '% age 18–34'
          : layer === 'middle_age'      ? '% Middle Age (35-49)'
@@ -75,7 +79,7 @@
         </span>
       </div>
       <div class="legend-note">
-        {{ ['cuban', 'puerto_rican', 'venezuelan', 'colombian', 'jamaican', 'other_hispanic', 'young', 'middle_age', 'women', 'black'].includes(layer) 
+        {{ ['cuban', 'puerto_rican', 'venezuelan', 'colombian', 'jamaican', 'haitian', 'other_hispanic', 'young', 'middle_age', 'women', 'black'].includes(layer) 
          ? 'Source: ACS 2024 5-yr, Census tracts within Florida'
          : 'Source: FL Division of Elections (County level)' }}
       </div>
@@ -92,6 +96,7 @@
           <li><strong>Venezuelan:</strong> % of population identifying as Venezuelan</li>
           <li><strong>Colombian:</strong> % of population identifying as Colombian</li>
           <li><strong>Jamaican:</strong> % of population identifying as Jamaican</li>
+          <li><strong>Haitian:</strong> % of population identifying as Haitian</li>
           <li><strong>Other Hispanic:</strong> % of population identifying as Other Hispanic</li>
           <li><strong>Youth (% 18-34):</strong> % of population aged 18 to 34</li>
           <li><strong>Middle Age (% 35-49):</strong> % of population aged 35 to 49</li>
@@ -115,7 +120,7 @@ import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
-type LayerName = 'state' | 'cuban' | 'puerto_rican' | 'venezuelan' | 'colombian' | 'jamaican' | 'other_hispanic' | 'young' | 'middle_age' | 'women' | 'black' | 'democrat' | 'unaffiliated' | 'republican'
+type LayerName = 'state' | 'cuban' | 'puerto_rican' | 'venezuelan' | 'colombian' | 'jamaican' | 'haitian' | 'other_hispanic' | 'young' | 'middle_age' | 'women' | 'black' | 'democrat' | 'unaffiliated' | 'republican'
 
 const mapEl = ref<HTMLElement | null>(null)
 const loading = ref(true)
@@ -131,6 +136,7 @@ let puertoRicanLayer: L.GeoJSON | null = null
 let venezuelanLayer: L.GeoJSON | null = null
 let colombianLayer: L.GeoJSON | null = null
 let jamaicanLayer: L.GeoJSON | null = null
+let haitianLayer: L.GeoJSON | null = null
 let otherHispanicLayer: L.GeoJSON | null = null
 
 let youngLayer: L.GeoJSON | null = null
@@ -159,6 +165,9 @@ const colColors = ['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026']
 
 const jamBreaks = [0, 1, 2, 4, 8, 100]
 const jamColors = ['#f6eff7', '#d0d1e6', '#a6bddb', '#67a9cf', '#1c9099']
+
+const haitianBreaks = [0, 2, 5, 10, 15, 100]
+const haitianColors = ['#edf8fb', '#b2e2e2', '#66c2a4', '#2ca25f', '#006d2c']
 
 const otherHispBreaks = [0, 5, 10, 15, 20, 100]
 const otherHispColors = ['#feebe2', '#fbb4b9', '#f768a1', '#c51b8a', '#7a0177']
@@ -199,6 +208,7 @@ const activeLegend = computed(() => {
     : layer.value === 'venezuelan'   ? [venBreaks, venColors]
     : layer.value === 'colombian'    ? [colBreaks, colColors]
     : layer.value === 'jamaican'     ? [jamBreaks, jamColors]
+    : layer.value === 'haitian'      ? [haitianBreaks, haitianColors]
     : layer.value === 'other_hispanic'? [otherHispBreaks, otherHispColors]
     : layer.value === 'young'        ? [youngBreaks, youngColors]
     : layer.value === 'middle_age'   ? [middleAgeBreaks, middleAgeColors]
@@ -242,6 +252,7 @@ function buildDemoLayers() {
     venezuelanLayer = createDemoLayer('pct_venezuelan', venBreaks, venColors, 'Venezuelan')
     colombianLayer = createDemoLayer('pct_colombian', colBreaks, colColors, 'Colombian')
     jamaicanLayer = createDemoLayer('pct_jamaican', jamBreaks, jamColors, 'Jamaican')
+    haitianLayer = createDemoLayer('pct_haitian', haitianBreaks, haitianColors, 'Haitian')
     otherHispanicLayer = createDemoLayer('pct_other_hispanic', otherHispBreaks, otherHispColors, 'Other Hispanic')
     youngLayer = createDemoLayer('pct_young', youngBreaks, youngColors, 'Age 18–34')
     middleAgeLayer = createDemoLayer('pct_middle_age', middleAgeBreaks, middleAgeColors, 'Middle Age (35-49)')
@@ -316,6 +327,7 @@ function setLayer(name: LayerName) {
   venezuelanLayer?.remove()
   colombianLayer?.remove()
   jamaicanLayer?.remove()
+  haitianLayer?.remove()
   otherHispanicLayer?.remove()
   youngLayer?.remove()
   middleAgeLayer?.remove()
@@ -347,6 +359,9 @@ function setLayer(name: LayerName) {
     stateLayer?.addTo(map)
   } else if (name === 'jamaican') {
     jamaicanLayer?.addTo(map)
+    stateLayer?.addTo(map)
+  } else if (name === 'haitian') {
+    haitianLayer?.addTo(map)
     stateLayer?.addTo(map)
   } else if (name === 'other_hispanic') {
     otherHispanicLayer?.addTo(map)
@@ -483,6 +498,7 @@ onUnmounted(() => {
 .venezuelan-swatch    { background: #31a354; }
 .colombian-swatch     { background: #f03b20; }
 .jamaican-swatch      { background: #67a9cf; }
+.haitian-swatch       { background: #66c2a4; }
 .other_hispanic-swatch{ background: #c51b8a; }
 
 .young-swatch         { background: #2171b5; }
