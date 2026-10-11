@@ -4,7 +4,7 @@ An interactive map application visualizing demographics and voter registration d
 
 ## Features
 * Interactive map of Florida counties and demographic data.
-* Demographic layers for various groups (Cuban, Puerto Rican, Venezuelan, Colombian, Jamaican, Other Hispanic, Youth, Middle Age, Women, Black).
+* Demographic layers for various groups (Cuban, Puerto Rican, Venezuelan, Colombian, Jamaican, Haitian, Other Hispanic, Youth, Middle Age, Women, Black).
 * Voter Registration layers.
 * "Sources" button placed over the Gulf of Mexico (vertically centered on the left side to ensure it remains over the water on all device screens, including phones) for easy reference. Clicking this button opens an in-app modal containing detailed data source information for all demographic and voter registration layers.
 
@@ -18,6 +18,7 @@ The map provides several interactive layers containing demographic and voter reg
 * **Venezuelan:** % of population identifying as Venezuelan
 * **Colombian:** % of population identifying as Colombian
 * **Jamaican:** % of population identifying as Jamaican
+* **Haitian:** % of population identifying as Haitian
 * **Other Hispanic:** % of population identifying as Other Hispanic
 * **Youth (% 18-34):** % of population aged 18 to 34
 * **Middle Age (% 35-49):** % of population aged 35 to 49

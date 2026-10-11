@@ -67,6 +67,7 @@ def main():
                 "pct_venezuelan": round(random.uniform(0, 10), 1),
                 "pct_colombian": round(random.uniform(0, 10), 1),
                 "pct_jamaican": round(random.uniform(0, 5), 1),
+                "pct_haitian": round(random.uniform(0, 10), 1),
                 "pct_other_hispanic": round(random.uniform(0, 15), 1),
                 "pct_young": round(random.uniform(10, 35), 1),
                 "pct_middle_age": round(random.uniform(15, 30), 1),
